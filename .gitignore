@@ -7,6 +7,7 @@
 ## Get latest from https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
 
 # User-specific files
+*.vs
 *.suo
 *.user
 *.userosscache
@@ -280,3 +281,4 @@ __pycache__/
 build/
 
 # End of https://www.gitignore.io/api/visualstudio
+/.vs
