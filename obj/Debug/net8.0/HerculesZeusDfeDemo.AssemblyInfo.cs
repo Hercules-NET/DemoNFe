@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("HerculesZeusDfeDemo")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+3d74a1d54f3604e137f2cfa77ef1daa1f8709c14")]
 [assembly: System.Reflection.AssemblyProductAttribute("HerculesZeusDfeDemo")]
 [assembly: System.Reflection.AssemblyTitleAttribute("HerculesZeusDfeDemo")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
