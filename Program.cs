@@ -2,6 +2,8 @@
 using HerculesZeusDfeDemo;
 using NFe.Classes;
 using NFe.Classes.Servicos.Tipos;
+using NFe.Danfe.Base.NFe;
+using NFe.Danfe.OpenFast.NFe;
 using NFe.Servicos;
 using NFe.Servicos.Retorno;
 using NFe.Utils;
@@ -41,12 +43,14 @@ var configuracao = new ConfiguracaoServico()
 };
 
 //gerando nfe
-var nfe = FactoryNfe.Gerar(serie: 32, nro: 112);
+var nfe = FactoryNfe.Gerar(serie: 32, nro: 117);
 var codigoNumero = nfe.infNFe.ide.cNF;
 Console.WriteLine("Codigo NFE: " + codigoNumero);
 var idLote = Convert.ToInt32(nfe.infNFe.ide.nNF);//idlote é o mesmo que o numero da nf
 
 Helpers.AbrirXml(nfe.ObterXmlString());//abrindo para visualizacao (sem assinatura)
+Console.WriteLine("XML gerado sem assinatura. pressione qualquer tecla para enviar assinar");
+Console.ReadKey();
 
 //assinando nfe
 nfe.Assina(configuracao);
@@ -56,8 +60,6 @@ var chaveAcesso = nfe.infNFe.Id.ToUpper().Replace("NFE", "");
 Validador.Valida(ServicoNFe.NFeAutorizacao, configuracao.VersaoNFeAutorizacao, FuncoesXml.ClasseParaXmlString(nfe), false, configuracao.DiretorioSchemas);
 
 Helpers.AbrirXml(nfe.ObterXmlString());//abrindo para visualizacao (com assinatura)
-
-//xml gerado localmente
 Console.WriteLine("XML gerado e assinado localmente, pressione qualquer tecla para enviar para sefaz");
 Console.ReadKey();
 
@@ -112,21 +114,49 @@ try
         var protNFe = retornoSefaz.Retorno.protNFe;
         var infProt = protNFe.infProt;
 
+        nfeProc nfeprocXml = null;
         if (NfeSituacao.Autorizada(infProt.cStat))
         {
             //autorizado uso nfe
-            var nfeproc = new nfeProc
+            nfeprocXml = new nfeProc
             {
                 NFe = new NFe.Classes.NFe().CarregarDeXmlString(xmlEnvio),
                 protNFe = protNFe,
                 versao = protNFe.versao
             };
 
-            var xmlFinal = nfeproc.ObterXmlString();
-            Console.WriteLine($"Nota Fiscal Emitida com Sucesso!");
+            var xmlFinal = nfeprocXml.ObterXmlString();
             //abrindo xml
             Helpers.AbrirXml(xmlFinal);
+
+            Console.WriteLine($"Nota Fiscal Emitida com Sucesso! Pressione algo para imprimir");
+            Console.ReadKey();
         }
+
+        //IMPRESSAO DANFE openfast (necessario ultima versao da dll NFe.Danfe.OpenFast.dll)
+        DanfeFrNfe danfe = new DanfeFrNfe(proc: nfeprocXml, configuracaoDanfeNfe: new ConfiguracaoDanfeNfe()
+        {
+            Logomarca = null,
+            DuasLinhas = false,
+            DocumentoCancelado = false,
+            QuebrarLinhasObservacao = true,
+            ExibirResumoCanhoto = true,
+            ResumoCanhoto = "x",
+            ChaveContingencia = "y",
+            ExibeCampoFatura = false,
+            ImprimirISSQN = true,
+            ImprimirDescPorc = true,
+            ImprimirTotalLiquido = true,
+            ImprimirUnidQtdeValor = ImprimirUnidQtdeValor.Comercial,
+            ExibirTotalTributos = true,
+            ExibeRetencoes = false
+        },
+        desenvolvedor: "NOME DA SOFTWARE HOUSE AQUI",
+        arquivoRelatorio: string.Empty);
+        byte[] danfeEmPdfBytes = danfe.ExportarPdf();
+
+        //abrindo xml
+        Helpers.AbrirPdf(danfeEmPdfBytes);
     }
 }
 catch (Exception ex)
