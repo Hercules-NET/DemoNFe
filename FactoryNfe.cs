@@ -1,19 +1,14 @@
 ﻿using DFe.Classes.Flags;
 using NFe.Classes.Informacoes;
-using NFe.Classes.Informacoes.Identificacao.Tipos;
-using NFe.Classes.Informacoes.Identificacao;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using NFe.Classes.Informacoes.Emitente;
 using NFe.Classes.Informacoes.Destinatario;
-using NFe.Classes.Informacoes.Transporte;
-using NFe.Classes.Informacoes.Pagamento;
-using NFe.Classes.Informacoes.Total;
 using NFe.Classes.Informacoes.Detalhe.Tributacao.Estadual;
 using NFe.Classes.Informacoes.Detalhe.Tributacao.Federal;
+using NFe.Classes.Informacoes.Emitente;
+using NFe.Classes.Informacoes.Identificacao;
+using NFe.Classes.Informacoes.Identificacao.Tipos;
+using NFe.Classes.Informacoes.Pagamento;
+using NFe.Classes.Informacoes.Total;
+using NFe.Classes.Informacoes.Transporte;
 
 namespace HerculesZeusDfeDemo
 {
