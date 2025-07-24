@@ -11,6 +11,8 @@ Este é um projeto de demonstração que implementa a emissão de **Nota Fiscal 
 - ✅ Envio para SEFAZ
 - ✅ Geração de DANFE (PDF)
 
+⚠️ **ATENÇÃO**: Este projeto está configurado para o **ambiente de homologação** e apenas para estudo, não utilize em PRODUÇÃO!
+
 ## 🎯 Funcionalidades
 
 - **Emissão de NFe 4.0**: Compatível com o layout mais atual
@@ -90,84 +92,14 @@ HerculesZeusDfeDemo/
 ├── Schemas/               # Schemas XSD para validação
 ├── NFe/                   # Templates de relatórios
 │   └── NFeRetrato.frx     # Template DANFE
-├── *.dll                  # Bibliotecas do DANFE
+├── *.dll                  # DLL do ZeusFiscal ao buildar os projetos referentes
 └── HerculesZeusDfeDemo.csproj
 ```
 
-## 🔧 Configurações Principais
-
-### ConfiguracaoServico
-
-| Propriedade | Descrição | Valor Padrão |
-|-------------|-----------|--------------|
-| `tpAmb` | Ambiente (Homologação/Produção) | `Homologacao` |
-| `cUF` | Estado emissor | `SP` |
-| `VersaoLayout` | Versão do layout NFe | `Versao400` |
-| `TimeOut` | Timeout para requisições | `20000ms` |
-| `ValidarSchemas` | Validar XML contra schemas | `false` |
-
-### Emitente (FactoryNfe.cs)
-
-Configurações do emitente da NFe:
-- **CNPJ**: 62559695000101
-- **Razão Social**: BREDA'S INFORMATICA LTDA
-- **Nome Fantasia**: BREDAS SISTEMAS
-- **Regime Tributário**: Simples Nacional
-
-## 🔄 Fluxo de Emissão
-
-1. **Configuração**: Carregamento de certificado e parâmetros
-2. **Geração**: Criação da estrutura XML da NFe
-3. **Visualização**: Exibição do XML não assinado
-4. **Assinatura**: Aplicação da assinatura digital
-5. **Validação**: Verificação contra schemas XSD
-6. **Envio**: Transmissão para SEFAZ
-7. **Protocolo**: Recebimento do protocolo de autorização
-8. **DANFE**: Geração e exibição do PDF
-
-## 📊 Dados da NFe de Exemplo
-
-- **Série**: 32
-- **Número**: 117
-- **Produto**: Água Mineral (R$ 10,00)
-- **NCM**: 22021000
-- **CFOP**: 5102
-- **Regime**: Simples Nacional (CSOSN 102)
-
-## 🚨 Importante
-
-⚠️ **ATENÇÃO**: Este projeto está configurado para o **ambiente de homologação**. Para usar em produção:
-
-1. Altere `tpAmb` para `Producao`
-2. Configure um certificado válido para produção
-3. Ajuste os dados do emitente para dados reais
-4. Teste exaustivamente antes de usar
-
-## 🐛 Solução de Problemas
-
-### Certificado não encontrado
-```
-Erro: Arquivo de certificado não encontrado
-Solução: Verifique o caminho do arquivo .pfx
-```
-
-### Erro de validação
-```
-Erro: XML inválido
-Solução: Verifique se os schemas estão na pasta Schemas/
-```
-
-### Timeout na SEFAZ
-```
-Erro: Timeout ao comunicar com SEFAZ
-Solução: Verifique conexão com internet e firewall
-```
-
 ## 📚 Recursos Adicionais
-
 - 🎥 **Vídeo Tutorial**: [YouTube - Demo Zeus Fiscal](https://www.youtube.com/watch?v=3i06uBOfgSE)
 - 💬 **Discord**: [Comunidade Hercules](https://discord.gg/EE4TGKAkkG)
-- 📖 **Documentação**: [Zeus Fiscal GitHub](https://github.com/Hercules-NET/ZeusFiscal)
+- 📖 **Projeto Referencia**: [Zeus Fiscal GitHub](https://github.com/Hercules-NET/ZeusFiscal)
 - 📋 **Manual SEFAZ**: [Portal NFe](http://www.nfe.fazenda.gov.br/)
 
 ## 🤝 Contribuindo
@@ -181,13 +113,6 @@ Solução: Verifique conexão com internet e firewall
 ## 📝 Licença
 
 Este projeto é distribuído sob a licença MIT. Veja `LICENSE` para mais informações.
-
-## 👨‍💻 Autor
-
-**Breda's Informática**
-- 🌐 Website: [bredas.com.br](https://bredas.com.br)
-- 📧 Email: bredas@bredas.com.br
-- 📞 Telefone: (14) 3413-3244
 
 ---
 
