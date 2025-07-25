@@ -1,5 +1,7 @@
 # 🚀 Demo NFe com Zeus Fiscal
 
+VEJA O VIDEO: https://www.youtube.com/watch?v=ifak7tPhS5I
+
 ## 📋 Sobre o Projeto
 
 Este é um projeto de demonstração que implementa a emissão de **Nota Fiscal Eletrônica (NFe)** utilizando a biblioteca [Zeus Fiscal](https://github.com/Hercules-NET/ZeusFiscal). O projeto demonstra o processo completo de:
