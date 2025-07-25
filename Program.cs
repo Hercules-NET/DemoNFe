@@ -43,7 +43,7 @@ var configuracao = new ConfiguracaoServico()
 };
 
 //gerando nfe
-var nfe = FactoryNfe.Gerar(serie: 32, nro: 117);
+var nfe = FactoryNfe.Gerar(serie: 32, nro: 121);
 var codigoNumero = nfe.infNFe.ide.cNF;
 Console.WriteLine("Codigo NFE: " + codigoNumero);
 var idLote = Convert.ToInt32(nfe.infNFe.ide.nNF);//idlote é o mesmo que o numero da nf
@@ -51,6 +51,7 @@ var idLote = Convert.ToInt32(nfe.infNFe.ide.nNF);//idlote é o mesmo que o numer
 Helpers.AbrirXml(nfe.ObterXmlString());//abrindo para visualizacao (sem assinatura)
 Console.WriteLine("XML gerado sem assinatura. pressione qualquer tecla para enviar assinar");
 Console.ReadKey();
+//------------------------------
 
 //assinando nfe
 nfe.Assina(configuracao);
@@ -62,6 +63,7 @@ Validador.Valida(ServicoNFe.NFeAutorizacao, configuracao.VersaoNFeAutorizacao, F
 Helpers.AbrirXml(nfe.ObterXmlString());//abrindo para visualizacao (com assinatura)
 Console.WriteLine("XML gerado e assinado localmente, pressione qualquer tecla para enviar para sefaz");
 Console.ReadKey();
+//------------------------------
 
 //enviando lote para api do sefaz
 string recibo = "";
@@ -128,6 +130,7 @@ try
             var xmlFinal = nfeprocXml.ObterXmlString();
             //abrindo xml
             Helpers.AbrirXml(xmlFinal);
+            //------------------------------
 
             Console.WriteLine($"Nota Fiscal Emitida com Sucesso! Pressione algo para imprimir");
             Console.ReadKey();
